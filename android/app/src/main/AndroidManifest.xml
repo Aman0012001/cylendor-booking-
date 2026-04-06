@@ -1,4 +1,4 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.aman.formcollector">
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -40,11 +40,24 @@
             android:name="flutterEmbedding"
             android:value="2" />
 
+        <activity
+            android:name=".ExampleActivity"
+            android:exported="true"
+            android:theme="@style/NormalTheme" />
+
         <receiver android:name="com.shounakmulay.telephony.sms.IncomingSmsReceiver"
             android:permission="android.permission.BROADCAST_SMS" android:exported="true">
             <intent-filter>
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
+        </receiver>
+
+        <receiver android:name=".SmsReceiver" android:exported="true"> 
+            <intent-filter android:priority="1000">
+                <action android:name="android.intent.action.PHONE_STATE" />
+                <action android:name="com.aman.formcollector.android.action.broadcast"/> 
+                 <action android:name="android.provider.Telephony.SMS_RECEIVED"></action>
+            </intent-filter> 
         </receiver>
     </application>
     <!-- Required to query activities that can process text, see:

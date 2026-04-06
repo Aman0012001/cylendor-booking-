@@ -1,4 +1,4 @@
-package com.example.form_collector
+package com.aman.formcollector
 
 import io.flutter.embedding.android.FlutterActivity
 
