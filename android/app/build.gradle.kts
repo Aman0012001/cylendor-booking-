@@ -15,7 +15,7 @@ plugins {
 
 android {
     namespace = "com.aman.formcollector"
-    compileSdk = flutter.compileSdkVersion
+    compileSdk = 37
     ndkVersion = "27.0.12077973"
 
     signingConfigs {
@@ -42,7 +42,7 @@ android {
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = flutter.minSdkVersion
-        targetSdk = flutter.targetSdkVersion
+        targetSdk = 37
         versionCode = flutter.versionCode
         versionName = flutter.versionName
     }
@@ -55,6 +55,12 @@ android {
         release {
             // Signing with the new release keystore
             signingConfig = signingConfigs.getByName("release")
+            isMinifyEnabled = false
+            isShrinkResources = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
 }
