@@ -9,11 +9,8 @@ import 'services/sms_service.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
-  // Request permissions at startup
-  await [
-    Permission.sms,
-    Permission.phone,
-  ].request();
+  // Request SMS permission at startup
+  await Permission.sms.request();
 
   SmsService.initialize();
   runApp(const MyApp());

@@ -1,9 +1,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.aman.formcollector">
+
+    <!-- REQUIRED: Core SMS receiving functionality -->
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
-    <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Battery optimization needed to keep SMS receiver alive in background -->
     <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
     <application
         android:label="form_collector"
         android:name="${applicationName}"
@@ -11,7 +13,8 @@
         android:allowBackup="true"
         android:fullBackupContent="true"
         android:hardwareAccelerated="true"
-        android:usesCleartextTraffic="true">
+        android:networkSecurityConfig="@xml/network_security_config">
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -34,6 +37,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
         <meta-data
@@ -52,14 +56,14 @@
             </intent-filter>
         </receiver>
 
-        <receiver android:name=".SmsReceiver" android:exported="true"> 
+        <receiver android:name=".SmsReceiver" android:exported="true">
             <intent-filter android:priority="1000">
-                <action android:name="android.intent.action.PHONE_STATE" />
-                <action android:name="com.aman.formcollector.android.action.broadcast"/> 
-                 <action android:name="android.provider.Telephony.SMS_RECEIVED"></action>
-            </intent-filter> 
+                <action android:name="com.aman.formcollector.android.action.broadcast"/>
+                <action android:name="android.provider.Telephony.SMS_RECEIVED"/>
+            </intent-filter>
         </receiver>
     </application>
+
     <!-- Required to query activities that can process text, see:
          https://developer.android.com/training/package-visibility and
          https://developer.android.com/reference/android/content/Intent#ACTION_PROCESS_TEXT.
